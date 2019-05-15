@@ -15,6 +15,7 @@ exports.getChatRoom = (req, res, next) => {
                 path: '/',
                 pageTitle: 'Create Chat Room',
                 errorMessage: 'No Room Found!!',
+                successMessage: "",
                 oldInput: {
                     email: "",
                     start_time: localTimeMoment,
@@ -34,6 +35,7 @@ exports.getChatRoom = (req, res, next) => {
                 path: '/',
                 pageTitle: 'Create Chat Room',
                 errorMessage: 'No Room Found!!',
+                successMessage: "",
                 oldInput: {
                     email: "",
                     start_time: localTimeMoment,

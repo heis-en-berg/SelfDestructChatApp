@@ -27,6 +27,7 @@ exports.getCreateRoom = (req, res, next) => {
         path: '/',
         pageTitle: 'Create Chat Room',
         errorMessage: "",
+        successMessage: "",
         oldInput: {
             email: "",
             start_time: localTime,
@@ -49,6 +50,7 @@ exports.postCreateRoom = (req, res, next) => {
             path: '/',
             pageTitle: 'Create Chat Room',
             errorMessage: errors.array()[0].msg,
+            successMessage: '',
             oldInput: {
                 email: email,
                 start_time: start_time,
@@ -83,7 +85,19 @@ exports.postCreateRoom = (req, res, next) => {
         room
         .save()
         .then(result => {
-            res.redirect('/');
+            res.status(422).render('room/create-room', {
+                path: '/',
+                pageTitle: 'Create Chat Room',
+                errorMessage: '',
+                successMessage: 'Room created!! Please check your mail for further details.',
+                oldInput: {
+                    email: email,
+                    start_time: req.body.start_time,
+                    duration: duration
+                },
+                validationErrors: errors.array()
+            });
+            
             sendMail(email, start_time, duration, invitee_emails, token, (err) => {
                 if(err){
                     console.log("Error in sending email: " + err);
