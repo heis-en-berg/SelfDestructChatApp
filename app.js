@@ -76,9 +76,13 @@ mongoose
         socket.on('new_message', (data) => {
           //broadcast the new message
           const messageBody = {message : data.message, username : socket.username};
-          room.addMessage(messageBody);
-          console.log(socket.id +" " + messageBody.message);
-          io.sockets.in(socket.room).emit('new_message', messageBody);
+          room.addMessage(messageBody)
+          .then(result => {
+            io.sockets.in(socket.room).emit('new_message', messageBody);
+          })
+          .catch(err => {
+            socket.emit('failed_to_send_message', {message : "Failed to send message!! Please try again.", username : "Server"});
+          });
         })
       })
       .catch(err => {

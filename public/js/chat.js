@@ -11,7 +11,7 @@ $(function(){
 	var room = $("#room")
 
 	//make connection
-	var socket = io.connect('https://mortalchat.herokuapp.com/', { query: "room=" + room.val()})
+	var socket = io.connect('http://mortalchat.herokuapp.com/', { query: "room=" + room.val()})
 
 	//Emit message
 	send_message.click(function(){
@@ -33,6 +33,11 @@ $(function(){
 		feedback.html('');
 		message.val('');
 		chatroom.append("<p class='message'>" + data.username + ": " + data.message + "</p>")
+	})
+	socket.on("failed_to_send_message", (data) => {
+		feedback.html('');
+		message.val('');
+		chatroom.append("<p class='message_fail'>" + data.username + ": " + data.message + "</p>")
 	})
 
 	//Emit a username

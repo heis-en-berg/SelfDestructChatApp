@@ -44,9 +44,9 @@ const roomSchema = new Schema({
 roomSchema.index( { tokenExpireAt: 1 }, { expireAfterSeconds: 0 } );
 
 roomSchema.methods.addMessage = function(message){
-    const updatedChat = [...this.chat];
-    updatedChat.push(message);
-    this.chat = updatedChat;
+    //const updatedChat = [...this.chat];
+    this.chat.push(message);
+    //this.chat = updatedChat;
     return this.save();
 };
 
