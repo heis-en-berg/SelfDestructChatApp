@@ -108,7 +108,7 @@ exports.postCreateRoom = (req, res, next) => {
             subject: "Chat Room",
             html: `
             <p>Chat Room Details</p>
-            <p>Click this <a href="http://localhost:3000/room/${token}">link</a> to join the room.</p>
+            <p>Click this <a href="http://https://mortalchat.herokuapp.com/room/${token}">link</a> to join the room.</p>
             <p>Start Time: ${start_time_string}</p>
             <p>Duration: ${duration} minutes</p>
           `

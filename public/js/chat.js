@@ -11,7 +11,7 @@ $(function(){
 	var room = $("#room")
 
 	//make connection
-	var socket = io.connect('http://localhost:3000', { query: "room=" + room.val()})
+	var socket = io.connect('https://mortalchat.herokuapp.com/', { query: "room=" + room.val()})
 
 	//Emit message
 	send_message.click(function(){
