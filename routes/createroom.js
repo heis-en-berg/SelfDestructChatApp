@@ -35,7 +35,7 @@ router.post(
           body('duration')
           .isInt()
           .custom((value, { req }) => {
-            if( value < 1 || value > 20){
+            if( value < 1 || value > 60){
                 throw new Error('Invalid duration');
             }
             return true;

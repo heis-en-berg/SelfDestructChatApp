@@ -57,12 +57,20 @@ mongoose
           io.sockets.in(socket.room).emit('redirect', '/');
           socket.disconnect();
         }
-        socket.duration = room.duration;
+        
+        let timeNow = Date.now();
+        let expiryTime = room.tokenExpireAt.getTime();
+        const duration = (expiryTime - timeNow) / 60000;
+
+        if(duration < 0){
+          io.sockets.in(socket.room).emit('redirect', '/');
+          socket.disconnect();
+        }
 
         setTimeout(function(){
           io.sockets.in(socket.room).emit('redirect', '/');
           socket.disconnect();
-        }, socket.duration * 60 * 1000);
+        }, duration * 60 * 1000);
   
         //emit old
         let chat = room.chat;
