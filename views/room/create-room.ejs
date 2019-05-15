@@ -1,0 +1,67 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="/css/multiple-emails.css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="/js/multiple-emails.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.2/semantic.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.2/semantic.min.js"></script>
+    
+    <script type="text/javascript">
+		$(function() {
+			$('#invitee_emails').multiple_emails({theme: "SemanticUI"});
+			$('#invitee_emails').text($('#example_emailSUI').val());
+			$('#invitee_emails').change( function(){
+				$('#invitee_emails').text($(this).val());
+			});
+		});
+    </script>
+    
+    
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <% if (errorMessage) { %>
+            <div class="user-message user-message--error"><%= errorMessage %></div>
+        <% } %>
+        <form class="login-form" action="/createroom" method="POST">
+            <div class="form-control">
+                <label for="email">Email</label>
+                <input 
+                    class="<%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
+                    type="email" 
+                    name="email" 
+                    id="email"
+                    value="<%= oldInput.email %>">
+            </div>
+
+            <div class="form-control">
+                <label for="invitee_emails">Invitee Emails</label>
+                <input type='text' id='invitee_emails' name='invitee_emails' class='form-control' value=''>
+            </div>
+
+            <div class="form-control">
+                    <label for="start_time">Start Date & Time</label>
+                    <input id="start_time" type="datetime-local" name="start_time" value="<%= oldInput.start_time %>">
+            </div>
+
+            <div class="form-control">
+                    <label for="duration">Duration (1-20 minutes)</label>
+                    <input id="duration" type="number" name="duration" min="1" max="20" value="<%= oldInput.duration %>" required>
+            </div>
+
+            <button class="btn" type="submit">Create Room</button>
+        </form>
+    </main>
+    <script>
+            $(document).keypress(
+                    function(event){
+                    if (event.which == '13') {
+                        event.preventDefault();
+                    }
+                });
+    </script>
+<%- include('../includes/end.ejs') %>

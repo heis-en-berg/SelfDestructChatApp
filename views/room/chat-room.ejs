@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/main.css">
+    <meta http-equiv="Content-Type" const="text/html;charset=UTF-8" />
+    <link href="http://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css" >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <title>Simple Chat App</title>
+  </head>
+
+  <body>
+    <div class="backdrop"></div>
+    <header class="main-header">
+        <nav class="main-header__nav">
+            <ul class="main-header__item-list">
+                <li class="main-header__item">
+                    <a class="<%= path === '/' ? 'active' : '' %>" href="/">MortalCHAT</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+      <div id="change_username">
+    <input id="username" type="text" />
+    <input id="room" type="hidden" name="room" value="<%= room %>">
+	<button id="send_username" type="button">Change username</button>
+      </div>
+    </section>
+
+    <section id="chatroom">
+      <section id="feedback"></section>
+    </section>
+
+    
+
+    <section id="input_zone"> 
+      <input id="message" class="vertical-align" type="text" />
+      <button id="send_message" class="vertical-align" type="button">Send</button>
+    </section>
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/js/chat.js"></script>
+    <%- include('../includes/end.ejs') %>
