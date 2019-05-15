@@ -9,6 +9,7 @@ const Room = require('./models/room');
 
 const MONGODB_URI =
   'mongodb+srv://karandhingra:kdJ_gjXeLh2WW2A@cluster0-9wibb.mongodb.net/test?retryWrites=true';
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
@@ -38,7 +39,7 @@ app.use((error, req, res, next) => {
 mongoose
   .connect(MONGODB_URI, { useCreateIndex: true, useNewUrlParser: true })
   .then(result => {
-    server = app.listen(3000);
+    server = app.listen(PORT);
     const io = require("socket.io")(server)
     //listen on every connection
     io.on('connection', (socket) => {
