@@ -48,7 +48,8 @@ exports.getChatRoom = (req, res, next) => {
         return res.status(422).render('room/chat-room', {
             path: '/',
             pageTitle: 'Chat Room',
-            room: token
+            room: token,
+            room_name: room.roomName
         });
         
     })

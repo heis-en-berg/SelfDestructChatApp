@@ -40,9 +40,13 @@ exports.getCreateRoom = (req, res, next) => {
 exports.postCreateRoom = (req, res, next) => {
     const email = req.body.email;
     const duration = req.body.duration;
+    const roomName = req.body.room_name;
     const invitee_emails_string = req.body.invitee_emails;
     let invitee_emails = invitee_emails_string;
     let start_time = req.body.start_time;
+
+    let localTime  = moment.utc(moment.utc().format()).toDate()
+    localTime = moment(localTime).format('YYYY-MM-DD[T]HH:mm');
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -54,7 +58,8 @@ exports.postCreateRoom = (req, res, next) => {
             oldInput: {
                 email: email,
                 start_time: start_time,
-                duration: duration
+                duration: duration,
+                room_name: roomName
             },
             validationErrors: errors.array()
         });
@@ -78,6 +83,7 @@ exports.postCreateRoom = (req, res, next) => {
             start_time: start_time,
             duration: duration,
             invitee_emails: invitee_emails,
+            roomName: roomName,
             token: token,
             tokenExpireAt: expireAt,
             chat: []
@@ -91,9 +97,10 @@ exports.postCreateRoom = (req, res, next) => {
                 errorMessage: '',
                 successMessage: 'Room created!! Please check your mail for further details.',
                 oldInput: {
-                    email: email,
-                    start_time: req.body.start_time,
-                    duration: duration
+                    email: "",
+                    start_time: localTime,
+                    duration: "",
+                    room_name: ""
                 },
                 validationErrors: errors.array()
             });

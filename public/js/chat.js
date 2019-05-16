@@ -15,7 +15,9 @@ $(function(){
 
 	//Emit message
 	send_message.click(function(){
-		socket.emit('new_message', {message : message.val()})
+		if(message.val() !== ""){
+			socket.emit('new_message', {message : message.val()})
+		}
 	})
 
 	//Listen on old_messages
@@ -24,7 +26,7 @@ $(function(){
 		message.val('');
 		var chat = data.chat;
 		for (var i = 0; i < chat.length; i++) {
-			chatroom.append("<p class='message'>" + chat[i].username + ": " + chat[i].message + "</p>")
+			chatroom.append("<div class='row message-bubble'><p class='text-muted'>" + chat[i].username + "</p><span>" + chat[i].message +"</span></div>");
 		}
 	})
 
@@ -32,12 +34,14 @@ $(function(){
 	socket.on("new_message", (data) => {
 		feedback.html('');
 		message.val('');
-		chatroom.append("<p class='message'>" + data.username + ": " + data.message + "</p>")
+		chatroom.append("<div class='row message-bubble'><p class='text-muted'>" + data.username + "</p><span>" + data.message +"</span></div>")
 	})
+
 	socket.on("failed_to_send_message", (data) => {
 		feedback.html('');
 		message.val('');
-		chatroom.append("<p class='message_fail'>" + data.username + ": " + data.message + "</p>")
+		chatroom.append("<div class='row message-bubble-server-error'><p class='text-muted'>" + data.username + "</p><span>" + data.message +"</span></div>")
+		//chatroom.append("<p class='message_fail'>" + data.username + ": " + data.message + "</p>")
 	})
 
 	//Emit a username

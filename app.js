@@ -57,7 +57,7 @@ mongoose
           io.sockets.in(socket.room).emit('redirect', '/');
           socket.disconnect();
         }
-        
+
         let timeNow = Date.now();
         let expiryTime = room.tokenExpireAt.getTime();
         const duration = (expiryTime - timeNow) / 60000;
@@ -89,6 +89,7 @@ mongoose
             io.sockets.in(socket.room).emit('new_message', messageBody);
           })
           .catch(err => {
+            console.log(err);
             socket.emit('failed_to_send_message', {message : "Failed to send message!! Please try again.", username : "Server"});
           });
         })

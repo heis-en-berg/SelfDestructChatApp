@@ -15,6 +15,10 @@ router.post(
           .isEmail()
           .withMessage('Please enter a valid email address.')
           .normalizeEmail(),
+        body('room_name')
+          .trim(" ")
+          .isLength({min:5, max: 20})
+          .withMessage('Please enter a valid room name.'),
         body('start_time')
           .custom((value, { req }) => {
             let localTime  = moment.utc(moment.utc().format()).toDate();
@@ -32,7 +36,7 @@ router.post(
             }
             return true;
           }),
-          body('duration')
+        body('duration')
           .isInt()
           .custom((value, { req }) => {
             if( value < 1 || value > 60){

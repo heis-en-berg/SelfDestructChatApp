@@ -19,6 +19,10 @@ const roomSchema = new Schema({
         type: [String],
         required: true
     },
+    roomName: {
+        type: String,
+        required: true
+    },
     token: {
         type: String,
         required: true

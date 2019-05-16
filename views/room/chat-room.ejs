@@ -3,14 +3,38 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= pageTitle %></title>
     <link rel="stylesheet" href="/css/main.css">
     <meta http-equiv="Content-Type" const="text/html;charset=UTF-8" />
     <link href="http://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="/css/style.css" >
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-    <title>Simple Chat App</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <style>
+    .message-bubble 
+{
+    padding: 10px 0px 10px 0px;
+}
+
+.message-bubble-server-error 
+{
+    padding: 10px 0px 10px 0px;
+    background-color: rgb(204, 85, 85);
+}
+
+.message-bubble:nth-child(even) { background-color: #F5F5F5; }
+
+.message-bubble > *
+{
+    padding-left: 10px;    
+}
+
+.panel-body { padding: 0px; }
+
+.panel-heading { background-color: #3d6da7 !important; color: white !important; }
+    </style>
   </head>
 
   <body>
@@ -25,25 +49,41 @@
         </nav>
     </header>
 
-    <section>
-      <div id="change_username">
-    <input id="username" type="text" />
-    <input id="room" type="hidden" name="room" value="<%= room %>">
-	<button id="send_username" type="button">Change username</button>
-      </div>
-    </section>
+    <div class="container">
+      <div class="row">
+          <div class="panel panel-default">
+            <div class="panel-heading">Room: <%= room_name %></div>
+            <div class="panel-body">
+              <div class="container">
+                <section>
+                  <div id="change_username">
+                    <input id="username" type="text" />
+                    <input id="room" type="hidden" name="room" value="<%= room %>">
+                    <button id="send_username" type="button">Change username</button>
+                  </div>
+                </section>
 
-    <section id="chatroom">
-      <section id="feedback"></section>
-    </section>
+                <section id="chatroom">
+                  <section id="feedback"></section>
+                </section>
+              </div>
+              <div class="panel-footer">
+                  <div class="input-group">
 
-    
+                   <input id="message" type="text" class="form-control" >
+                   <span class="input-group-btn">
+                     <button class="btn btn-default" type="button" id="send_message" >Send</button>
+                   </span>
 
-    <section id="input_zone"> 
-      <input id="message" class="vertical-align" type="text" />
-      <button id="send_message" class="vertical-align" type="button">Send</button>
-    </section>
+                   <!-- <input id="message" class="vertical-align" type="text" />
+                  <button id="send_message" class="vertical-align" type="button">Send</button> -->
 
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+                 </div>
+             </div>
+           </div>
+         </div>
+     </div>
+ </div>
+
     <script src="/js/chat.js"></script>
     <%- include('../includes/end.ejs') %>
