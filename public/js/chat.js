@@ -42,13 +42,15 @@ $(function(){
 	socket.on("failed_to_send_message", (data) => {
 		feedback.html('');
 		message.val('');
-		chatroom.append("<div class='row message-bubble-server-error'><p class='text-muted'>" + data.username + "</p><span>" + data.message +"</span></div>")
+		chatroom.append("<div class='row message-bubble-server-error'><p style='color:blue;font-weight:bold;'>" + data.username + "</p><span>" + data.message +"</span></div>")
 		//chatroom.append("<p class='message_fail'>" + data.username + ": " + data.message + "</p>")
 	})
 
 	//Emit a username
 	send_username.click(function(){
-		socket.emit('change_username', {username : username.val()})
+		if(username.val() !== ""){
+			socket.emit('change_username', {username : username.val()})
+		}
 	})
 
 	socket.on('redirect', function(destination) {

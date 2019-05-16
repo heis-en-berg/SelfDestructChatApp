@@ -54,7 +54,7 @@ mongoose
       .then(room => {
         let updatedRoom = room;
         if(!room){
-          io.sockets.in(socket.room).emit('redirect', '/');
+          socket.emit('redirect', '/');
           socket.disconnect();
         }
 
@@ -63,14 +63,18 @@ mongoose
         const duration = (expiryTime - timeNow) / 60000;
 
         if(duration < 0){
-          io.sockets.in(socket.room).emit('redirect', '/');
+          socket.emit('redirect', '/');
           socket.disconnect();
         }
 
         setTimeout(function(){
-          io.sockets.in(socket.room).emit('redirect', '/');
+          socket.emit('redirect', '/');
           socket.disconnect();
         }, duration * 60 * 1000);
+
+        setTimeout(function(){
+          socket.emit('failed_to_send_message', {message : "30 seconds", username : "Time remaining: "});
+        }, (duration * 60 * 1000) - 30000);
   
         //emit old
         let chat = room.chat;
@@ -95,7 +99,7 @@ mongoose
         })
       })
       .catch(err => {
-        io.sockets.in(socket.room).emit('redirect', '/500');
+        socket.emit('redirect', '/500');
         socket.disconnect();
       });
     });
