@@ -27,6 +27,7 @@ $(function(){
 		var chat = data.chat;
 		for (var i = 0; i < chat.length; i++) {
 			chatroom.append("<div class='row message-bubble'><p class='text-muted'>" + chat[i].username + "</p><span>" + chat[i].message +"</span></div>");
+			window.scrollBy(0, 100);
 		}
 	})
 
@@ -35,6 +36,7 @@ $(function(){
 		feedback.html('');
 		message.val('');
 		chatroom.append("<div class='row message-bubble'><p class='text-muted'>" + data.username + "</p><span>" + data.message +"</span></div>")
+		window.scrollBy(0, 100);
 	})
 
 	socket.on("failed_to_send_message", (data) => {
