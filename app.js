@@ -76,7 +76,7 @@ mongoose
           socket.emit('failed_to_send_message', {message : "30 seconds", username : "Time remaining: "});
         }, (duration * 60 * 1000) - 30000);
   
-        //emit old
+        //emit old messages
         let chat = room.chat;
         socket.emit('old_messages', {chat : chat});
         
