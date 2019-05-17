@@ -76,7 +76,7 @@ form {
 .main-header__item a.active,
 .main-header__item button:hover,
 .main-header__item button:active {
-  color: rgb(0, 0, 0);
+  color: white;
 }
 
 .mobile-nav {
@@ -114,7 +114,7 @@ form {
 .mobile-nav__item button {
   font: inherit;
   text-decoration: none;
-  color: black;
+  color: white;
   font-size: 1.5rem;
   padding: 0.5rem 2rem;
   background: transparent;
