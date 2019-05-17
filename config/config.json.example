@@ -1,0 +1,3 @@
+{
+    "MONGODB_URI" : "mongodb+srv://<USERNAME>:<PASSWORD>@cluster0-9wibb.mongodb.net/test?retryWrites=true"
+}
