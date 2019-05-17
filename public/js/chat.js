@@ -43,7 +43,7 @@ $(function(){
 		feedback.html('');
 		message.val('');
 		chatroom.append("<div class='row message-bubble-server-error'><p style='color:blue;font-weight:bold;'>" + data.username + "</p><span>" + data.message +"</span></div>")
-		//chatroom.append("<p class='message_fail'>" + data.username + ": " + data.message + "</p>")
+		window.scrollBy(0, 100);
 	})
 
 	//Emit a username
